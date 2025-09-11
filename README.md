@@ -1,0 +1,1 @@
+Repo containing some of the code exercises from the [AOMP book](https://doi.org/10.1016/B978-0-12-415950-1.00011-2)
