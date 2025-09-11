@@ -7,16 +7,16 @@ internal class Philosopher
     private const int Interval = 5;
     private readonly Random _random;
     private readonly Stopwatch _stopwatch;
+    private readonly Chopstick _chopstickRight, _chopstickLeft;
 
-    public Philosopher(IReadOnlyList<Chopstick> chopsticks, int index1, int index2, Random random)
+    public Philosopher(IReadOnlyList<Chopstick> chopsticks, int indexLeft, int indexRight, Random random)
     {
-        _random = new Random();
-        this.Chopsticks = [chopsticks[index1], chopsticks[index2]];
+        _random = random;
+        this._chopstickLeft = chopsticks[indexLeft];
+        this._chopstickRight = chopsticks[indexRight];
         _stopwatch = new Stopwatch();
     }
 
-    public Chopstick[] Chopsticks { get; init; }
-    
     public long MillisecondsStarving => _stopwatch.ElapsedMilliseconds;
 
     public void DoWork()
@@ -39,20 +39,20 @@ internal class Philosopher
     {
         while (true)
         {
-            if (Chopsticks[0].Take(this) && Chopsticks[1].Take(this))
+            if (_chopstickLeft.Take(this) && _chopstickRight.Take(this))
             {
                 break;
             }
             
-            Chopsticks[0].PutDown(this);
-            Chopsticks[1].PutDown(this);
+            _chopstickLeft.PutDown(this);
+            _chopstickRight.PutDown(this);
         }
         
         _stopwatch.Reset();
         Thread.Sleep(_random.Next(Interval));
         _stopwatch.Start();
         
-        Chopsticks[0].PutDown(this);
-        Chopsticks[1].PutDown(this);
+        _chopstickLeft.PutDown(this);
+        _chopstickRight.PutDown(this);
     }
 }
