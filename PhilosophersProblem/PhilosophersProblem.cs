@@ -11,11 +11,11 @@ internal class PhilosophersProblem
         
         Console.WriteLine($"Seed: {seed}");
         var random = new Random(seed.Value);
-        this.Chopsticks = Enumerable.Range(0, count)
+        Chopsticks = Enumerable.Range(0, count)
             .Select(x => new Chopstick())
             .ToList();
 
-        this.Philosophers = Enumerable.Range(0, count)
+        Philosophers = Enumerable.Range(0, count)
             .Select(x => new Philosopher(Chopsticks, x, x == count - 1 ? 0 : x + 1, random))
             .ToList();
     }
@@ -29,13 +29,13 @@ internal class PhilosophersProblem
         
         while(true)
         {
-            for (var index = 0; index < this.Philosophers.Count; index++)
+            for (var index = 0; index < Philosophers.Count; index++)
             {
-                var philosopher = this.Philosophers[index];
+                var philosopher = Philosophers[index];
                 Console.WriteLine($"{index}: {philosopher.MillisecondsStarving}ms");
             }
             
-            Console.WriteLine($"Chopsticks taken: {this.Chopsticks.Count(x => x.IsTaken)}");
+            Console.WriteLine($"Chopsticks taken: {Chopsticks.Count(x => x.IsTaken)}");
             Thread.Sleep(1000);
         }
     }

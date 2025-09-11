@@ -7,11 +7,11 @@ internal class Chopstick
 
     public bool Take(Philosopher philosopher)
     {
-        return Interlocked.CompareExchange(ref this._philosopherUsingIt, philosopher, null) == null;
+        return Interlocked.CompareExchange(ref _philosopherUsingIt, philosopher, null) == null;
     }
 
     public void PutDown(Philosopher philosopher)
     {
-        Interlocked.CompareExchange(ref this._philosopherUsingIt, null, philosopher);
+        Interlocked.CompareExchange(ref _philosopherUsingIt, null, philosopher);
     }
 }

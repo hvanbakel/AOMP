@@ -12,8 +12,8 @@ internal class Philosopher
     public Philosopher(IReadOnlyList<Chopstick> chopsticks, int indexLeft, int indexRight, Random random)
     {
         _random = random;
-        this._chopstickLeft = chopsticks[indexLeft];
-        this._chopstickRight = chopsticks[indexRight];
+        _chopstickLeft = chopsticks[indexLeft];
+        _chopstickRight = chopsticks[indexRight];
         _stopwatch = new Stopwatch();
     }
 
@@ -32,7 +32,7 @@ internal class Philosopher
 
     private void Think()
     {
-        Thread.Sleep(this._random.Next(Interval));
+        Thread.Sleep(_random.Next(Interval));
     }
 
     private void Eat()
